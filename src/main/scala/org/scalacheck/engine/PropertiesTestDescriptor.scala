@@ -15,8 +15,9 @@ class PropertiesTestDescriptor(uniqueId: UniqueId, properties: Properties)
 
   override def execute(context: ScalaCheckExecutionContext, dynamicTestExecutor: Node.DynamicTestExecutor): ScalaCheckExecutionContext = {
     properties.properties.foreach { case (name, prop) =>
-      dynamicTestExecutor.execute(
-        PropertyTestDescriptor(uniqueId.append("prop", name), name, prop))
+      val descriptor = PropertyTestDescriptor(uniqueId.append("prop", name), name, prop)
+      addChild(descriptor)
+      dynamicTestExecutor.execute(descriptor)
     }
     context
   }
