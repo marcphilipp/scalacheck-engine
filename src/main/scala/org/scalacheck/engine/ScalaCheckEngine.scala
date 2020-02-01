@@ -9,7 +9,7 @@ import org.scalacheck.Properties
 class ScalaCheckEngine extends HierarchicalTestEngine[ScalaCheckExecutionContext] {
 
   private val resolver = EngineDiscoveryRequestResolver.builder[EngineDescriptor]()
-    .addClassContainerSelectorResolver(_.isAssignableFrom(classOf[Properties]))
+    .addClassContainerSelectorResolver(classOf[Properties].isAssignableFrom(_))
     .addSelectorResolver(new PropertiesClassSelectorResolver) // TODO pass in class filter
     .build()
 
