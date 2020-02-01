@@ -1,7 +1,11 @@
 plugins {
     scala
     `java-library`
+    `maven-publish`
 }
+
+group = "org.scalacheck"
+version = "0.1"
 
 repositories {
     mavenCentral()
@@ -17,4 +21,18 @@ dependencies {
     testImplementation("org.scalatest:scalatest_2.12:3.0.8")
     testImplementation("org.junit.platform:junit-platform-testkit")
     testRuntimeOnly("org.scala-lang.modules:scala-xml_2.12:1.2.0")
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }
