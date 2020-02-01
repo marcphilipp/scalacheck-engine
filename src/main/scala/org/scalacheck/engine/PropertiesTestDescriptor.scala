@@ -11,6 +11,8 @@ class PropertiesTestDescriptor(uniqueId: UniqueId, properties: Properties)
     with Node[ScalaCheckExecutionContext] {
   override def getType: Type = Type.CONTAINER
 
+  override def mayRegisterTests(): Boolean = true
+
   override def execute(context: ScalaCheckExecutionContext, dynamicTestExecutor: Node.DynamicTestExecutor): ScalaCheckExecutionContext = {
     properties.properties.foreach { case (name, prop) =>
       dynamicTestExecutor.execute(
