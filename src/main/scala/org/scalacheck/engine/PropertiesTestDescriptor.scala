@@ -12,6 +12,10 @@ class PropertiesTestDescriptor(uniqueId: UniqueId, properties: Properties)
   override def getType: Type = Type.CONTAINER
 
   override def execute(context: ScalaCheckExecutionContext, dynamicTestExecutor: Node.DynamicTestExecutor): ScalaCheckExecutionContext = {
+    properties.properties.foreach { case (name, prop) =>
+      dynamicTestExecutor.execute(
+        PropertyTestDescriptor(uniqueId.append("prop", name), name, prop))
+    }
     context
   }
 }

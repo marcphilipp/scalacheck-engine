@@ -11,12 +11,23 @@ import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class ScalaCheckIntegrationTests extends FunSuite {
-  test("can execute Properties subclass") {
+
+  test("discovers and executes Properties container class") {
     EngineTestKit.engine(new ScalaCheckEngine)
       .selectors(selectClass(StringSpecification.getClass))
       .execute()
       .containerEvents()
-      .debug()
       .assertStatistics(stats => stats.started(2))
+  }
+
+  test("discovers and executes properties") {
+    EngineTestKit.engine(new ScalaCheckEngine)
+      .selectors(selectClass(StringSpecification.getClass))
+      .execute()
+      .testEvents()
+      .assertStatistics(stats => stats
+        .started(3)
+        .succeeded(2)
+        .failed(1))
   }
 }
