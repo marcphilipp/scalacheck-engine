@@ -32,6 +32,7 @@ java {
 publishing {
     publications {
         create<MavenPublication>("maven") {
+            artifactId = "scalacheck-engine"
             from(components["java"])
         }
     }
