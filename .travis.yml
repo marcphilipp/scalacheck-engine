@@ -14,8 +14,8 @@ install:
 script:
   - ./gradlew pTML -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}"
   # The build is RED: The semicolons ignore the expected failure
-  - cd demo/gradle && ../../gradlew test ; cd - 
-  - cd demo/maven && mvn test ; cd -
+  - cd demo/gradle && ../../gradlew test -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}" ; cd - 
+  - cd demo/maven && mvn test -Dscala.version="${TRAVIS_SCALA_VERSION}" -Pscala.binary.version="${TRAVIS_SCALA_VERSION%.*}" ; cd -
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
