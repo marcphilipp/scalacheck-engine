@@ -9,7 +9,6 @@ jdk:
 
 install: 
   - ./gradlew --version
-  - gradle --version
   - mvn --version
 script:
   - ./gradlew pTML -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}"
