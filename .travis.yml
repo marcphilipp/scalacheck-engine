@@ -1,0 +1,26 @@
+language: scala
+
+scala:
+  - 2.12.10
+  - 2.13.1
+jdk:
+  - openjdk8
+  - openjdk11
+
+install:
+  - ./gradlew --version
+script:
+  - ./gradlew pTML -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}"
+  # The build is RED: The semicolons ignore the expected failure
+  - cd demo/gradle && ../../gradlew test -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}" ; cd -
+  - cd demo/maven && ./mvnw test -Dscala.version="${TRAVIS_SCALA_VERSION}" -Pscala.binary.version="${TRAVIS_SCALA_VERSION%.*}" ; cd -
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.m2/repository/

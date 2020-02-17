@@ -2,19 +2,22 @@ plugins {
     scala
 }
 
+val scalaVersion: String? by project
+val scalaBinaryVersion: String? by project
+
 repositories {
     mavenLocal {
         content {
-            includeModule("org.scalacheck", "scalacheck-engine")
+            includeModule("org.scalacheck", "scalacheck-engine_${scalaBinaryVersion}")
         }
     }
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.scala-lang:scala-library:2.12.10")
-    testImplementation("org.scalacheck:scalacheck_2.12:1.14.3")
-    testRuntimeOnly("org.scalacheck:scalacheck-engine:0.1")
+    implementation("org.scala-lang:scala-library:${scalaVersion}")
+    testImplementation("org.scalacheck:scalacheck_${scalaBinaryVersion}:1.14.3")
+    testRuntimeOnly("org.scalacheck:scalacheck-engine_${scalaBinaryVersion}:0.1.0")
 }
 
 tasks.test {

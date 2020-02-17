@@ -7,7 +7,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <encoding>UTF-8</encoding>
-    <scala.tools.version>2.12</scala.tools.version>
+    <scala.binary.version>2.12</scala.binary.version>
     <scala.version>2.12.10</scala.version>
   </properties>
 
@@ -21,14 +21,14 @@
     <!-- Test -->
     <dependency>
       <groupId>org.scalacheck</groupId>
-      <artifactId>scalacheck_2.12</artifactId>
+      <artifactId>scalacheck_${scala.binary.version}</artifactId>
       <version>1.14.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalacheck</groupId>
-      <artifactId>scalacheck-engine</artifactId>
-      <version>0.1</version>
+      <artifactId>scalacheck-engine_${scala.binary.version}</artifactId>
+      <version>0.1.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

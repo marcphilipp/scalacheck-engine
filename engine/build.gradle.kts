@@ -5,7 +5,10 @@ plugins {
 }
 
 group = "org.scalacheck"
-version = "0.1"
+version = "0.1.0"
+
+val scalaVersion: String? by project
+val scalaBinaryVersion: String? by project
 
 repositories {
     mavenCentral()
@@ -14,13 +17,13 @@ repositories {
 dependencies {
     api(platform("org.junit:junit-bom:5.6.0"))
     api("org.junit.platform:junit-platform-engine")
-    implementation("org.scalacheck:scalacheck_2.12:1.14.3")
-    implementation("org.scala-lang:scala-library:2.12.10")
-    implementation("org.scala-lang.modules:scala-java8-compat_2.12:0.9.0")
+    implementation("org.scalacheck:scalacheck_${scalaBinaryVersion}:1.14.3")
+    implementation("org.scala-lang:scala-library:${scalaVersion}")
+    implementation("org.scala-lang.modules:scala-java8-compat_${scalaBinaryVersion}:0.9.0")
     testImplementation("junit:junit:4.13")
-    testImplementation("org.scalatest:scalatest_2.12:3.0.8")
+    testImplementation("org.scalatest:scalatest_${scalaBinaryVersion}:3.0.8")
     testImplementation("org.junit.platform:junit-platform-testkit")
-    testRuntimeOnly("org.scala-lang.modules:scala-xml_2.12:1.2.0")
+    testRuntimeOnly("org.scala-lang.modules:scala-xml_${scalaBinaryVersion}:1.2.0")
 }
 
 java {
@@ -32,7 +35,7 @@ java {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            artifactId = "scalacheck-engine"
+            artifactId = "scalacheck-engine_${scalaBinaryVersion}"
             from(components["java"])
         }
     }
