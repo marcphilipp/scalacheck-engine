@@ -7,13 +7,13 @@ jdk:
   - openjdk8
   - openjdk11
 
-install: 
+install:
   - ./gradlew --version
   - mvn --version
 script:
   - ./gradlew pTML -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}"
   # The build is RED: The semicolons ignore the expected failure
-  - cd demo/gradle && ../../gradlew test -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}" ; cd - 
+  - cd demo/gradle && ../../gradlew test -PscalaVersion="${TRAVIS_SCALA_VERSION}" -PscalaBinaryVersion="${TRAVIS_SCALA_VERSION%.*}" ; cd -
   - cd demo/maven && mvn test -Dscala.version="${TRAVIS_SCALA_VERSION}" -Pscala.binary.version="${TRAVIS_SCALA_VERSION%.*}" ; cd -
 
 before_cache:
